@@ -1,0 +1,792 @@
+2020-06-16T13:28:18.234Z [error] uncaughtException ⨯ Unable to compile TypeScript:
+[96msrc/services/registrations.ts[0m:[93m97[0m:[93m36[0m - [91merror[0m[90m TS2339: [0mProperty 'map' does not exist on type 'Promise<[unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown]>'.
+
+[7m97[0m     const familySeqIds = familyIds.map(async (id) => {
+[7m  [0m [91m                                   ~~~[0m
+
+  [96msrc/services/registrations.ts[0m:[93m97[0m:[93m36[0m
+    [7m97[0m     const familySeqIds = familyIds.map(async (id) => {
+    [7m  [0m [96m                                   ~~~[0m
+    Did you forget to use 'await'?
+ :: TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/registrations.ts[0m:[93m97[0m:[93m36[0m - [91merror[0m[90m TS2339: [0mProperty 'map' does not exist on type 'Promise<[unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown]>'.
+
+[7m97[0m     const familySeqIds = familyIds.map(async (id) => {
+[7m  [0m [91m                                   ~~~[0m
+
+  [96msrc/services/registrations.ts[0m:[93m97[0m:[93m36[0m
+    [7m97[0m     const familySeqIds = familyIds.map(async (id) => {
+    [7m  [0m [96m                                   ~~~[0m
+    Did you forget to use 'await'?
+
+    at createTSError (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:434:12)
+    at reportTSError (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:438:19)
+    at getOutput (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:578:36)
+    at Object.compile (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:775:32)
+    at Module.m._compile (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:858:43)
+    at Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Object.require.extensions.(anonymous function) [as .ts] (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:861:12)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-api/src/routes/registrations.ts:4:32)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Module.m._compile (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:858:23)
+    at Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+2020-06-16T13:28:29.761Z [error] uncaughtException ⨯ Unable to compile TypeScript:
+[96msrc/services/registrations.ts[0m:[93m98[0m:[93m19[0m - [91merror[0m[90m TS2339: [0mProperty 'map' does not exist on type 'Promise<[unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown]>'.
+
+[7m98[0m         familyIds.map(async (id) => {
+[7m  [0m [91m                  ~~~[0m
+
+  [96msrc/services/registrations.ts[0m:[93m98[0m:[93m19[0m
+    [7m98[0m         familyIds.map(async (id) => {
+    [7m  [0m [96m                  ~~~[0m
+    Did you forget to use 'await'?
+ :: TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/registrations.ts[0m:[93m98[0m:[93m19[0m - [91merror[0m[90m TS2339: [0mProperty 'map' does not exist on type 'Promise<[unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown]>'.
+
+[7m98[0m         familyIds.map(async (id) => {
+[7m  [0m [91m                  ~~~[0m
+
+  [96msrc/services/registrations.ts[0m:[93m98[0m:[93m19[0m
+    [7m98[0m         familyIds.map(async (id) => {
+    [7m  [0m [96m                  ~~~[0m
+    Did you forget to use 'await'?
+
+    at createTSError (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:434:12)
+    at reportTSError (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:438:19)
+    at getOutput (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:578:36)
+    at Object.compile (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:775:32)
+    at Module.m._compile (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:858:43)
+    at Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Object.require.extensions.(anonymous function) [as .ts] (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:861:12)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-api/src/routes/registrations.ts:4:32)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Module.m._compile (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:858:23)
+    at Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+2020-06-16T13:41:35.856Z [error] uncaughtException ⨯ Unable to compile TypeScript:
+[96msrc/services/registrations.ts[0m:[93m97[0m:[93m17[0m - [91merror[0m[90m TS2552: [0mCannot find name 'familyIds'. Did you mean 'families'?
+
+[7m97[0m     console.log(familyIds);
+[7m  [0m [91m                ~~~~~~~~~[0m
+
+  [96msrc/server.ts[0m:[93m62[0m:[93m7[0m
+    [7m62[0m const families = require('./routes/families');
+    [7m  [0m [96m      ~~~~~~~~[0m
+    'families' is declared here.
+[96msrc/services/registrations.ts[0m:[93m101[0m:[93m9[0m - [91merror[0m[90m TS2552: [0mCannot find name 'familyIds'. Did you mean 'families'?
+
+[7m101[0m     if (familyIds.length > 0) {
+[7m   [0m [91m        ~~~~~~~~~[0m
+
+  [96msrc/server.ts[0m:[93m62[0m:[93m7[0m
+    [7m62[0m const families = require('./routes/families');
+    [7m  [0m [96m      ~~~~~~~~[0m
+    'families' is declared here.
+[96msrc/services/registrations.ts[0m:[93m103[0m:[93m13[0m - [91merror[0m[90m TS2552: [0mCannot find name 'familyIds'. Did you mean 'families'?
+
+[7m103[0m             familyIds.map(async (id) => {
+[7m   [0m [91m            ~~~~~~~~~[0m
+
+  [96msrc/server.ts[0m:[93m62[0m:[93m7[0m
+    [7m62[0m const families = require('./routes/families');
+    [7m  [0m [96m      ~~~~~~~~[0m
+    'families' is declared here.
+[96msrc/services/registrations.ts[0m:[93m115[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'regs'.
+
+[7m115[0m     regs = regs.map((reg) => {
+[7m   [0m [91m    ~~~~[0m
+[96msrc/services/registrations.ts[0m:[93m115[0m:[93m12[0m - [91merror[0m[90m TS2304: [0mCannot find name 'regs'.
+
+[7m115[0m     regs = regs.map((reg) => {
+[7m   [0m [91m           ~~~~[0m
+[96msrc/services/registrations.ts[0m:[93m121[0m:[93m44[0m - [91merror[0m[90m TS2304: [0mCannot find name 'filters'.
+
+[7m121[0m     const total = await Registration.count(filters);
+[7m   [0m [91m                                           ~~~~~~~[0m
+[96msrc/services/registrations.ts[0m:[93m122[0m:[93m21[0m - [91merror[0m[90m TS2304: [0mCannot find name 'regs'.
+
+[7m122[0m     const gotMore = regs.length === perPage;
+[7m   [0m [91m                    ~~~~[0m
+[96msrc/services/registrations.ts[0m:[93m122[0m:[93m37[0m - [91merror[0m[90m TS2304: [0mCannot find name 'perPage'.
+
+[7m122[0m     const gotMore = regs.length === perPage;
+[7m   [0m [91m                                    ~~~~~~~[0m
+[96msrc/services/registrations.ts[0m:[93m124[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'res'.
+
+[7m124[0m     res.header({
+[7m   [0m [91m    ~~~[0m
+[96msrc/services/registrations.ts[0m:[93m125[0m:[93m19[0m - [91merror[0m[90m TS2304: [0mCannot find name 'page'.
+
+[7m125[0m         'X-Page': page,
+[7m   [0m [91m                  ~~~~[0m
+[96msrc/services/registrations.ts[0m:[93m126[0m:[93m22[0m - [91merror[0m[90m TS2304: [0mCannot find name 'perPage'.
+
+[7m126[0m         'X-PerPage': perPage,
+[7m   [0m [91m                     ~~~~~~~[0m
+[96msrc/services/registrations.ts[0m:[93m129[0m:[93m13[0m - [91merror[0m[90m TS2304: [0mCannot find name 'regs'.
+
+[7m129[0m     }).json(regs);
+[7m   [0m [91m            ~~~~[0m
+[96msrc/services/registrations.ts[0m:[93m93[0m:[93m43[0m - [91merror[0m[90m TS1005: [0m';' expected.
+
+[7m93[0m             return familyMembers[0].family);
+[7m  [0m [91m                                          ~[0m
+
+  [96msrc/services/registrations.ts[0m:[93m86[0m:[93m33[0m
+    [7m86[0m         regs.map(async (reg) => {
+    [7m  [0m [96m                                ~[0m
+    The parser expected to find a '}' to match the '{' token here.
+[96msrc/services/registrations.ts[0m:[93m93[0m:[93m44[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m93[0m             return familyMembers[0].family);
+[7m  [0m [91m                                           ~[0m
+[96msrc/services/registrations.ts[0m:[93m95[0m:[93m5[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m95[0m     );
+[7m  [0m [91m    ~[0m
+[96msrc/services/registrations.ts[0m:[93m133[0m:[93m1[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m133[0m });
+[7m   [0m [91m~[0m
+[96msrc/services/registrations.ts[0m:[93m133[0m:[93m2[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m133[0m });
+[7m   [0m [91m ~[0m
+ :: TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/registrations.ts[0m:[93m97[0m:[93m17[0m - [91merror[0m[90m TS2552: [0mCannot find name 'familyIds'. Did you mean 'families'?
+
+[7m97[0m     console.log(familyIds);
+[7m  [0m [91m                ~~~~~~~~~[0m
+
+  [96msrc/server.ts[0m:[93m62[0m:[93m7[0m
+    [7m62[0m const families = require('./routes/families');
+    [7m  [0m [96m      ~~~~~~~~[0m
+    'families' is declared here.
+[96msrc/services/registrations.ts[0m:[93m101[0m:[93m9[0m - [91merror[0m[90m TS2552: [0mCannot find name 'familyIds'. Did you mean 'families'?
+
+[7m101[0m     if (familyIds.length > 0) {
+[7m   [0m [91m        ~~~~~~~~~[0m
+
+  [96msrc/server.ts[0m:[93m62[0m:[93m7[0m
+    [7m62[0m const families = require('./routes/families');
+    [7m  [0m [96m      ~~~~~~~~[0m
+    'families' is declared here.
+[96msrc/services/registrations.ts[0m:[93m103[0m:[93m13[0m - [91merror[0m[90m TS2552: [0mCannot find name 'familyIds'. Did you mean 'families'?
+
+[7m103[0m             familyIds.map(async (id) => {
+[7m   [0m [91m            ~~~~~~~~~[0m
+
+  [96msrc/server.ts[0m:[93m62[0m:[93m7[0m
+    [7m62[0m const families = require('./routes/families');
+    [7m  [0m [96m      ~~~~~~~~[0m
+    'families' is declared here.
+[96msrc/services/registrations.ts[0m:[93m115[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'regs'.
+
+[7m115[0m     regs = regs.map((reg) => {
+[7m   [0m [91m    ~~~~[0m
+[96msrc/services/registrations.ts[0m:[93m115[0m:[93m12[0m - [91merror[0m[90m TS2304: [0mCannot find name 'regs'.
+
+[7m115[0m     regs = regs.map((reg) => {
+[7m   [0m [91m           ~~~~[0m
+[96msrc/services/registrations.ts[0m:[93m121[0m:[93m44[0m - [91merror[0m[90m TS2304: [0mCannot find name 'filters'.
+
+[7m121[0m     const total = await Registration.count(filters);
+[7m   [0m [91m                                           ~~~~~~~[0m
+[96msrc/services/registrations.ts[0m:[93m122[0m:[93m21[0m - [91merror[0m[90m TS2304: [0mCannot find name 'regs'.
+
+[7m122[0m     const gotMore = regs.length === perPage;
+[7m   [0m [91m                    ~~~~[0m
+[96msrc/services/registrations.ts[0m:[93m122[0m:[93m37[0m - [91merror[0m[90m TS2304: [0mCannot find name 'perPage'.
+
+[7m122[0m     const gotMore = regs.length === perPage;
+[7m   [0m [91m                                    ~~~~~~~[0m
+[96msrc/services/registrations.ts[0m:[93m124[0m:[93m5[0m - [91merror[0m[90m TS2304: [0mCannot find name 'res'.
+
+[7m124[0m     res.header({
+[7m   [0m [91m    ~~~[0m
+[96msrc/services/registrations.ts[0m:[93m125[0m:[93m19[0m - [91merror[0m[90m TS2304: [0mCannot find name 'page'.
+
+[7m125[0m         'X-Page': page,
+[7m   [0m [91m                  ~~~~[0m
+[96msrc/services/registrations.ts[0m:[93m126[0m:[93m22[0m - [91merror[0m[90m TS2304: [0mCannot find name 'perPage'.
+
+[7m126[0m         'X-PerPage': perPage,
+[7m   [0m [91m                     ~~~~~~~[0m
+[96msrc/services/registrations.ts[0m:[93m129[0m:[93m13[0m - [91merror[0m[90m TS2304: [0mCannot find name 'regs'.
+
+[7m129[0m     }).json(regs);
+[7m   [0m [91m            ~~~~[0m
+[96msrc/services/registrations.ts[0m:[93m93[0m:[93m43[0m - [91merror[0m[90m TS1005: [0m';' expected.
+
+[7m93[0m             return familyMembers[0].family);
+[7m  [0m [91m                                          ~[0m
+
+  [96msrc/services/registrations.ts[0m:[93m86[0m:[93m33[0m
+    [7m86[0m         regs.map(async (reg) => {
+    [7m  [0m [96m                                ~[0m
+    The parser expected to find a '}' to match the '{' token here.
+[96msrc/services/registrations.ts[0m:[93m93[0m:[93m44[0m - [91merror[0m[90m TS1005: [0m')' expected.
+
+[7m93[0m             return familyMembers[0].family);
+[7m  [0m [91m                                           ~[0m
+[96msrc/services/registrations.ts[0m:[93m95[0m:[93m5[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m95[0m     );
+[7m  [0m [91m    ~[0m
+[96msrc/services/registrations.ts[0m:[93m133[0m:[93m1[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m133[0m });
+[7m   [0m [91m~[0m
+[96msrc/services/registrations.ts[0m:[93m133[0m:[93m2[0m - [91merror[0m[90m TS1128: [0mDeclaration or statement expected.
+
+[7m133[0m });
+[7m   [0m [91m ~[0m
+
+    at createTSError (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:434:12)
+    at reportTSError (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:438:19)
+    at getOutput (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:578:36)
+    at Object.compile (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:775:32)
+    at Module.m._compile (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:858:43)
+    at Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Object.require.extensions.(anonymous function) [as .ts] (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:861:12)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-api/src/routes/registrations.ts:4:32)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Module.m._compile (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:858:23)
+    at Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+2020-06-16T13:45:17.140Z [error] uncaughtException ⨯ Unable to compile TypeScript:
+[96msrc/services/registrations.ts[0m:[93m89[0m:[93m30[0m - [91merror[0m[90m TS2552: [0mCannot find name 'patient'. Did you mean 'Patient'?
+
+[7m89[0m                     patient: patient._id,
+[7m  [0m [91m                             ~~~~~~~[0m
+
+  [96msrc/services/registrations.ts[0m:[93m3[0m:[93m9[0m
+    [7m3[0m const { Patient } = require('../models/patient');
+    [7m [0m [96m        ~~~~~~~[0m
+    'Patient' is declared here.
+[96msrc/services/registrations.ts[0m:[93m107[0m:[93m31[0m - [91merror[0m[90m TS2304: [0mCannot find name 'familySeqIds'.
+
+[7m107[0m             newReg.families = familySeqIds;
+[7m   [0m [91m                              ~~~~~~~~~~~~[0m
+ :: TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/registrations.ts[0m:[93m89[0m:[93m30[0m - [91merror[0m[90m TS2552: [0mCannot find name 'patient'. Did you mean 'Patient'?
+
+[7m89[0m                     patient: patient._id,
+[7m  [0m [91m                             ~~~~~~~[0m
+
+  [96msrc/services/registrations.ts[0m:[93m3[0m:[93m9[0m
+    [7m3[0m const { Patient } = require('../models/patient');
+    [7m [0m [96m        ~~~~~~~[0m
+    'Patient' is declared here.
+[96msrc/services/registrations.ts[0m:[93m107[0m:[93m31[0m - [91merror[0m[90m TS2304: [0mCannot find name 'familySeqIds'.
+
+[7m107[0m             newReg.families = familySeqIds;
+[7m   [0m [91m                              ~~~~~~~~~~~~[0m
+
+    at createTSError (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:434:12)
+    at reportTSError (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:438:19)
+    at getOutput (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:578:36)
+    at Object.compile (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:775:32)
+    at Module.m._compile (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:858:43)
+    at Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Object.require.extensions.(anonymous function) [as .ts] (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:861:12)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-api/src/routes/registrations.ts:4:32)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Module.m._compile (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:858:23)
+    at Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+2020-06-25T02:48:20.411Z [error] uncaughtException Cannot find module 'nodemailer' :: Error: Cannot find module 'nodemailer'
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:636:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:562:25)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-api/src/services/users.ts:8:20)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Module.m._compile (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:858:23)
+    at Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Object.require.extensions.(anonymous function) [as .ts] (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:861:12)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-api/src/routes/users.ts:4:24)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+2020-06-25T02:49:37.191Z [error] uncaughtException Cannot find module 'nodemailer' :: Error: Cannot find module 'nodemailer'
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:636:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:562:25)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-api/src/services/users.ts:8:20)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Module.m._compile (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:858:23)
+    at Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Object.require.extensions.(anonymous function) [as .ts] (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:861:12)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-api/src/routes/users.ts:4:24)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+2020-06-25T02:53:00.726Z [error] uncaughtException Cannot find module 'nodemailer' :: Error: Cannot find module 'nodemailer'
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:636:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:562:25)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-api/src/services/users.ts:8:20)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Module.m._compile (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:858:23)
+    at Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Object.require.extensions.(anonymous function) [as .ts] (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:861:12)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-api/src/routes/users.ts:4:24)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+2020-06-25T02:55:48.645Z [error] uncaughtException Cannot find module 'nodemailer' :: Error: Cannot find module 'nodemailer'
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:636:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:562:25)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-api/src/services/users.ts:8:20)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Module.m._compile (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:858:23)
+    at Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Object.require.extensions.(anonymous function) [as .ts] (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:861:12)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-api/src/routes/users.ts:4:24)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+2020-06-25T08:30:00.429Z [error] uncaughtException  ⨯ Unable to compile TypeScript:
+[96msrc/services/patients.ts[0m:[93m114[0m:[93m19[0m - [91merror[0m[90m TS2451: [0mCannot redeclare block-scoped variable 'p'.
+
+[7m114[0m             const p = patient
+[7m   [0m [91m                  ~[0m
+[96msrc/services/patients.ts[0m:[93m115[0m:[93m19[0m - [91merror[0m[90m TS2451: [0mCannot redeclare block-scoped variable 'p'.
+
+[7m115[0m             const p.familyId = familyId
+[7m   [0m [91m                  ~[0m
+[96msrc/services/patients.ts[0m:[93m110[0m:[93m19[0m - [91merror[0m[90m TS2451: [0mCannot redeclare block-scoped variable 'familyId'.
+
+[7m110[0m             const familyId =
+[7m   [0m [91m                  ~~~~~~~~[0m
+[96msrc/services/patients.ts[0m:[93m115[0m:[93m21[0m - [91merror[0m[90m TS2451: [0mCannot redeclare block-scoped variable 'familyId'.
+
+[7m115[0m             const p.familyId = familyId
+[7m   [0m [91m                    ~~~~~~~~[0m
+[96msrc/services/patients.ts[0m:[93m115[0m:[93m20[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m115[0m             const p.familyId = familyId
+[7m   [0m [91m                   ~[0m
+ :: TSError: ⨯ Unable to compile TypeScript:
+[96msrc/services/patients.ts[0m:[93m114[0m:[93m19[0m - [91merror[0m[90m TS2451: [0mCannot redeclare block-scoped variable 'p'.
+
+[7m114[0m             const p = patient
+[7m   [0m [91m                  ~[0m
+[96msrc/services/patients.ts[0m:[93m115[0m:[93m19[0m - [91merror[0m[90m TS2451: [0mCannot redeclare block-scoped variable 'p'.
+
+[7m115[0m             const p.familyId = familyId
+[7m   [0m [91m                  ~[0m
+[96msrc/services/patients.ts[0m:[93m110[0m:[93m19[0m - [91merror[0m[90m TS2451: [0mCannot redeclare block-scoped variable 'familyId'.
+
+[7m110[0m             const familyId =
+[7m   [0m [91m                  ~~~~~~~~[0m
+[96msrc/services/patients.ts[0m:[93m115[0m:[93m21[0m - [91merror[0m[90m TS2451: [0mCannot redeclare block-scoped variable 'familyId'.
+
+[7m115[0m             const p.familyId = familyId
+[7m   [0m [91m                    ~~~~~~~~[0m
+[96msrc/services/patients.ts[0m:[93m115[0m:[93m20[0m - [91merror[0m[90m TS1005: [0m',' expected.
+
+[7m115[0m             const p.familyId = familyId
+[7m   [0m [91m                   ~[0m
+
+    at createTSError (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:434:12)
+    at reportTSError (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:438:19)
+    at getOutput (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:578:36)
+    at Object.compile (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:775:32)
+    at Module.m._compile (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:858:43)
+    at Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Object.require.extensions.(anonymous function) [as .ts] (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:861:12)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-api/src/routes/patients.ts:3:27)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Module.m._compile (/Users/ratchatanuanchan/Documents/geth-api/node_modules/ts-node/src/index.ts:858:23)
+    at Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+2020-06-28T06:03:33.891Z [error] uncaughtException  /data/node_modules/bcrypt/lib/binding/bcrypt_lib.node: invalid ELF header :: Error: /data/node_modules/bcrypt/lib/binding/bcrypt_lib.node: invalid ELF header
+    at Object.Module._extensions..node (module.js:682:18)
+    at Module.load (module.js:566:32)
+    at tryModuleLoad (module.js:506:12)
+    at Function.Module._load (module.js:498:3)
+    at Module.require (module.js:597:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/data/node_modules/bcrypt/bcrypt.js:6:16)
+    at Module._compile (module.js:653:30)
+    at Object.Module._extensions..js (module.js:664:10)
+    at Module.load (module.js:566:32)
+    at tryModuleLoad (module.js:506:12)
+    at Function.Module._load (module.js:498:3)
+    at Module.require (module.js:597:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/data/src/services/users.ts:5:16)
+    at Module._compile (module.js:653:30)
+2020-06-28T06:10:07.077Z [error] uncaughtException  /data/node_modules/bcrypt/lib/binding/bcrypt_lib.node: invalid ELF header :: Error: /data/node_modules/bcrypt/lib/binding/bcrypt_lib.node: invalid ELF header
+    at Object.Module._extensions..node (module.js:682:18)
+    at Module.load (module.js:566:32)
+    at tryModuleLoad (module.js:506:12)
+    at Function.Module._load (module.js:498:3)
+    at Module.require (module.js:597:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/data/node_modules/bcrypt/bcrypt.js:6:16)
+    at Module._compile (module.js:653:30)
+    at Object.Module._extensions..js (module.js:664:10)
+    at Module.load (module.js:566:32)
+    at tryModuleLoad (module.js:506:12)
+    at Function.Module._load (module.js:498:3)
+    at Module.require (module.js:597:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/data/src/services/users.ts:5:16)
+    at Module._compile (module.js:653:30)
+2020-06-28T06:12:23.477Z [error] uncaughtException  /data/node_modules/bcrypt/lib/binding/bcrypt_lib.node: invalid ELF header :: Error: /data/node_modules/bcrypt/lib/binding/bcrypt_lib.node: invalid ELF header
+    at Object.Module._extensions..node (module.js:682:18)
+    at Module.load (module.js:566:32)
+    at tryModuleLoad (module.js:506:12)
+    at Function.Module._load (module.js:498:3)
+    at Module.require (module.js:597:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/data/node_modules/bcrypt/bcrypt.js:6:16)
+    at Module._compile (module.js:653:30)
+    at Object.Module._extensions..js (module.js:664:10)
+    at Module.load (module.js:566:32)
+    at tryModuleLoad (module.js:506:12)
+    at Function.Module._load (module.js:498:3)
+    at Module.require (module.js:597:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/data/src/services/users.ts:5:16)
+    at Module._compile (module.js:653:30)
+2020-06-28T06:17:03.545Z [error] uncaughtException  /data/node_modules/bcrypt/lib/binding/bcrypt_lib.node: invalid ELF header :: Error: /data/node_modules/bcrypt/lib/binding/bcrypt_lib.node: invalid ELF header
+    at Object.Module._extensions..node (module.js:682:18)
+    at Module.load (module.js:566:32)
+    at tryModuleLoad (module.js:506:12)
+    at Function.Module._load (module.js:498:3)
+    at Module.require (module.js:597:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/data/node_modules/bcrypt/bcrypt.js:6:16)
+    at Module._compile (module.js:653:30)
+    at Object.Module._extensions..js (module.js:664:10)
+    at Module.load (module.js:566:32)
+    at tryModuleLoad (module.js:506:12)
+    at Function.Module._load (module.js:498:3)
+    at Module.require (module.js:597:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/data/src/services/users.ts:5:16)
+    at Module._compile (module.js:653:30)
+2020-06-28T06:27:01.292Z [error] uncaughtException  /data/node_modules/bcrypt/lib/binding/napi-v3/bcrypt_lib.node: invalid ELF header :: Error: /data/node_modules/bcrypt/lib/binding/napi-v3/bcrypt_lib.node: invalid ELF header
+    at Object.Module._extensions..node (module.js:682:18)
+    at Module.load (module.js:566:32)
+    at tryModuleLoad (module.js:506:12)
+    at Function.Module._load (module.js:498:3)
+    at Module.require (module.js:597:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/data/node_modules/bcrypt/bcrypt.js:6:16)
+    at Module._compile (module.js:653:30)
+    at Object.Module._extensions..js (module.js:664:10)
+    at Module.load (module.js:566:32)
+    at tryModuleLoad (module.js:506:12)
+    at Function.Module._load (module.js:498:3)
+    at Module.require (module.js:597:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/data/src/services/users.ts:5:16)
+    at Module._compile (module.js:653:30)
+2020-06-28T07:14:15.017Z [error] uncaughtException dlopen(/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node, 1): no suitable image found.  Did find:
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00 :: Error: dlopen(/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node, 1): no suitable image found.  Did find:
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00
+    at Object.Module._extensions..node (internal/modules/cjs/loader.js:807:18)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/bcrypt.js:6:16)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-all/geth-api/src/services/users.ts:5:16)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+2020-06-28T07:15:09.522Z [error] uncaughtException dlopen(/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node, 1): no suitable image found.  Did find:
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00 :: Error: dlopen(/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node, 1): no suitable image found.  Did find:
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00
+    at Object.Module._extensions..node (internal/modules/cjs/loader.js:807:18)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/bcrypt.js:6:16)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-all/geth-api/src/services/users.ts:5:16)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+2020-06-28T14:07:22.997Z [error] uncaughtException dlopen(/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node, 1): no suitable image found.  Did find:
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00 :: Error: dlopen(/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node, 1): no suitable image found.  Did find:
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00
+    at Object.Module._extensions..node (internal/modules/cjs/loader.js:807:18)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/bcrypt.js:6:16)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-all/geth-api/src/services/users.ts:5:16)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+2020-06-28T14:08:03.507Z [error] uncaughtException dlopen(/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node, 1): no suitable image found.  Did find:
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00 :: Error: dlopen(/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node, 1): no suitable image found.  Did find:
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00
+    at Object.Module._extensions..node (internal/modules/cjs/loader.js:807:18)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/bcrypt.js:6:16)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-all/geth-api/src/services/users.ts:5:16)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+2020-06-28T14:08:25.365Z [error] uncaughtException dlopen(/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node, 1): no suitable image found.  Did find:
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00 :: Error: dlopen(/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node, 1): no suitable image found.  Did find:
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00
+    at Object.Module._extensions..node (internal/modules/cjs/loader.js:807:18)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/bcrypt.js:6:16)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-all/geth-api/src/services/users.ts:5:16)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+2020-06-29T02:59:11.301Z [error] uncaughtException dlopen(/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node, 1): no suitable image found.  Did find:
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00 :: Error: dlopen(/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node, 1): no suitable image found.  Did find:
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00
+    at Object.Module._extensions..node (internal/modules/cjs/loader.js:807:18)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/bcrypt.js:6:16)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-all/geth-api/src/services/users.ts:5:16)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+2020-06-29T03:14:31.544Z [error] uncaughtException  /data/node_modules/bcrypt/lib/binding/bcrypt_lib.node: invalid ELF header :: Error: /data/node_modules/bcrypt/lib/binding/bcrypt_lib.node: invalid ELF header
+    at Object.Module._extensions..node (module.js:682:18)
+    at Module.load (module.js:566:32)
+    at tryModuleLoad (module.js:506:12)
+    at Function.Module._load (module.js:498:3)
+    at Module.require (module.js:597:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/data/node_modules/bcrypt/bcrypt.js:6:16)
+    at Module._compile (module.js:653:30)
+    at Object.Module._extensions..js (module.js:664:10)
+    at Module.load (module.js:566:32)
+    at tryModuleLoad (module.js:506:12)
+    at Function.Module._load (module.js:498:3)
+    at Module.require (module.js:597:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/data/src/services/users.ts:5:16)
+    at Module._compile (module.js:653:30)
+2020-06-29T04:10:03.247Z [error] uncaughtException dlopen(/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node, 1): no suitable image found.  Did find:
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00 :: Error: dlopen(/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node, 1): no suitable image found.  Did find:
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00
+	/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/lib/binding/bcrypt_lib.node: unknown file type, first eight bytes: 0x7F 0x45 0x4C 0x46 0x02 0x01 0x01 0x00
+    at Object.Module._extensions..node (internal/modules/cjs/loader.js:807:18)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/bcrypt/bcrypt.js:6:16)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-all/geth-api/src/services/users.ts:5:16)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+2020-07-07T04:30:46.795Z [error] uncaughtException  /data/node_modules/bcrypt/lib/binding/bcrypt_lib.node: invalid ELF header :: Error: /data/node_modules/bcrypt/lib/binding/bcrypt_lib.node: invalid ELF header
+    at Object.Module._extensions..node (module.js:682:18)
+    at Module.load (module.js:566:32)
+    at tryModuleLoad (module.js:506:12)
+    at Function.Module._load (module.js:498:3)
+    at Module.require (module.js:597:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/data/node_modules/bcrypt/bcrypt.js:6:16)
+    at Module._compile (module.js:653:30)
+    at Object.Module._extensions..js (module.js:664:10)
+    at Module.load (module.js:566:32)
+    at tryModuleLoad (module.js:506:12)
+    at Function.Module._load (module.js:498:3)
+    at Module.require (module.js:597:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/data/src/services/users.ts:5:16)
+    at Module._compile (module.js:653:30)
+2020-07-07T04:41:02.451Z [error] uncaughtException  /data/node_modules/bcrypt/lib/binding/bcrypt_lib.node: invalid ELF header :: Error: /data/node_modules/bcrypt/lib/binding/bcrypt_lib.node: invalid ELF header
+    at Object.Module._extensions..node (module.js:682:18)
+    at Module.load (module.js:566:32)
+    at tryModuleLoad (module.js:506:12)
+    at Function.Module._load (module.js:498:3)
+    at Module.require (module.js:597:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/data/node_modules/bcrypt/bcrypt.js:6:16)
+    at Module._compile (module.js:653:30)
+    at Object.Module._extensions..js (module.js:664:10)
+    at Module.load (module.js:566:32)
+    at tryModuleLoad (module.js:506:12)
+    at Function.Module._load (module.js:498:3)
+    at Module.require (module.js:597:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/data/src/services/users.ts:5:16)
+    at Module._compile (module.js:653:30)
+2020-07-10T03:15:26.494Z [error] uncaughtException  dbConnection.on is not a function :: TypeError: dbConnection.on is not a function
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-all/geth-api/src/server.ts:58:14)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Module.m._compile (/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/ts-node/src/index.ts:858:23)
+    at Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Object.require.extensions.(anonymous function) [as .ts] (/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/ts-node/src/index.ts:861:12)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:831:12)
+    at startup (internal/bootstrap/node.js:283:19)
+    at bootstrapNodeJSCore (internal/bootstrap/node.js:622:3)
+2020-07-10T03:15:50.805Z [error] uncaughtException  dbConnection.on is not a function :: TypeError: dbConnection.on is not a function
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-all/geth-api/src/server.ts:58:14)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Module.m._compile (/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/ts-node/src/index.ts:858:23)
+    at Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Object.require.extensions.(anonymous function) [as .ts] (/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/ts-node/src/index.ts:861:12)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:831:12)
+    at startup (internal/bootstrap/node.js:283:19)
+    at bootstrapNodeJSCore (internal/bootstrap/node.js:622:3)
+2020-07-10T03:18:20.985Z [error] uncaughtException  dbConnection.on is not a function :: TypeError: dbConnection.on is not a function
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/geth-all/geth-api/src/server.ts:58:14)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Module.m._compile (/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/ts-node/src/index.ts:858:23)
+    at Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Object.require.extensions.(anonymous function) [as .ts] (/Users/ratchatanuanchan/Documents/geth-all/geth-api/node_modules/ts-node/src/index.ts:861:12)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:831:12)
+    at startup (internal/bootstrap/node.js:283:19)
+    at bootstrapNodeJSCore (internal/bootstrap/node.js:622:3)
+2020-08-14T10:17:38.439Z [error] uncaughtException  Cannot find module './routes/users' :: Error: Cannot find module './routes/users'
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:636:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:562:25)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/iPassServer/src/server.ts:103:15)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Module.m._compile (/Users/ratchatanuanchan/Documents/iPassServer/node_modules/ts-node/src/index.ts:858:23)
+    at Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Object.require.extensions.(anonymous function) [as .ts] (/Users/ratchatanuanchan/Documents/iPassServer/node_modules/ts-node/src/index.ts:861:12)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:831:12)
+    at startup (internal/bootstrap/node.js:283:19)
+    at bootstrapNodeJSCore (internal/bootstrap/node.js:622:3)
+2020-08-14T10:19:52.793Z [error] uncaughtException  Cannot find module './routes/users' :: Error: Cannot find module './routes/users'
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:636:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:562:25)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at Object.<anonymous> (/Users/ratchatanuanchan/Documents/iPassServer/src/server.ts:103:15)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Module.m._compile (/Users/ratchatanuanchan/Documents/iPassServer/node_modules/ts-node/src/index.ts:858:23)
+    at Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Object.require.extensions.(anonymous function) [as .ts] (/Users/ratchatanuanchan/Documents/iPassServer/node_modules/ts-node/src/index.ts:861:12)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:831:12)
+    at startup (internal/bootstrap/node.js:283:19)
+    at bootstrapNodeJSCore (internal/bootstrap/node.js:622:3)

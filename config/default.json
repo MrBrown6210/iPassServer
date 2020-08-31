@@ -1,0 +1,15 @@
+{
+  "name": "iPass",
+  "server": {
+    "port": "3030"
+  },
+  "db": {
+    "accessControl": false,
+    "url": "localhost",
+    "name": "ipass",
+    "port": "27017",
+    "username": "geth",
+    "password": "iWiLlTeLlYoUtOmOrRoW"
+  },
+  "jwtPrivateKey": ""
+}
