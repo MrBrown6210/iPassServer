@@ -13,15 +13,19 @@ interface ITrackDocument extends ITrack, mongoose.Document {}
 const TrackModel = new schema({
   owner: {
     type: String,
+    required: true,
   },
   found: {
     type: String,
+    required: true,
   },
   timestamp: {
     type: Number,
+    required: true,
   },
   stay: {
     type: Number,
+    required: true,
   },
 });
 

@@ -18,6 +18,11 @@ import express from "express";
 // const express = require('express');
 import multer from "multer";
 // const multer = require('multer');
+
+import dotenv from "dotenv";
+
+dotenv.config();
+
 import records from "./routes/records.route";
 import tracks from "./routes/tracks.route";
 const app = express();
@@ -130,11 +135,12 @@ dbConnection.on("error", (error) => {
 // app.use("/samples", samples);
 // app.use("/", home);
 
-app.use("/records", records);
-app.use("/tracks", tracks);
-
-app.use(errorHandler());
 app.use(express.static("public"));
+// app.use(errorHandler());
+
+app.use("/records", records);
+
+app.use("/tracks", tracks);
 
 const port = process.env.PORT || 3030;
 app.listen(port, () => {

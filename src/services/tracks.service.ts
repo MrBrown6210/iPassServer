@@ -3,6 +3,9 @@ import asyncMiddleware from "../middleware/async-middleware";
 import { Track, ITrack } from "../models/track.model";
 import { Request, Response, NextFunction } from "express";
 
+import error from "http-errors";
+import { isArray } from "util";
+
 const places = ["test3"];
 
 export const index = async (
@@ -19,16 +22,35 @@ export const create = async (
   res: Response,
   next: NextFunction
 ) => {
-  const track = new Track({
-    owner: req.body.owner,
-    found: req.body.found,
-    timestamp: req.body.timestamp,
-    stay: req.body.stay,
-  });
+  try {
+    const track = new Track({
+      owner: req.body.owner,
+      found: req.body.found,
+      timestamp: req.body.timestamp,
+      stay: req.body.stay,
+    });
+    await track.save();
+    res.json(track);
+  } catch (err) {
+    return next(err);
+  }
+};
 
-  await track.save();
-
-  res.json(track);
+export const createMultiple = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  if (!(req.body.items instanceof Array)) {
+    return next(error(400));
+  }
+  try {
+    const items: any[] = req.body.items;
+    const result = await Track.insertMany(items);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
 };
 
 // export const show = async (req: Request, res: Response, next: NextFunction) => {
@@ -66,7 +88,7 @@ export const explore = async (
   res: Response,
   next: NextFunction
 ) => {
-  const diseaseId: string = req.query.diseaseId as string;
+  const diseaseId: string = req.params.diseaseId as string;
   const day = Number(req.query.day) || 14;
   const start = Number(req.query.start) || Date.now() / 1000;
 
