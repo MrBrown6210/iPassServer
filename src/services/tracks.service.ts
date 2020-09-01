@@ -3,8 +3,7 @@ import asyncMiddleware from "../middleware/async-middleware";
 import { Track, ITrack } from "../models/track.model";
 import { Request, Response, NextFunction } from "express";
 
-import error from "http-errors";
-import { isArray } from "util";
+import createError from "http-errors";
 
 const places = ["test3"];
 
@@ -42,7 +41,7 @@ export const createMultiple = async (
   next: NextFunction
 ) => {
   if (!(req.body.items instanceof Array)) {
-    return next(error(400));
+    return next(createError(400));
   }
   try {
     const items: any[] = req.body.items;

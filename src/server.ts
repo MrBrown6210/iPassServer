@@ -135,12 +135,11 @@ dbConnection.on("error", (error) => {
 // app.use("/samples", samples);
 // app.use("/", home);
 
-app.use(express.static("public"));
-// app.use(errorHandler());
-
 app.use("/records", records);
-
 app.use("/tracks", tracks);
+
+app.use(express.static("public"));
+app.use(errorHandler());
 
 const port = process.env.PORT || 3030;
 app.listen(port, () => {
