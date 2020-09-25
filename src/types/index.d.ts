@@ -1,0 +1,40 @@
+// ใส่ค่าที่ต้องการเพื่อต้องการผลลัพธ์ที่ต้องการนั้นๆ
+
+export interface ITrack {
+  owner: string;
+  found: string;
+  leave_at: number;
+  stay: number;
+}
+
+export interface IPlace {
+  uuid: string;
+  name: string;
+  lat: number;
+  lng: number;
+}
+
+export interface BaseTable {
+  input: number;
+  output: number;
+}
+
+interface RequirePoint {
+  result: number;
+  require: number;
+}
+
+interface ITrackPoint extends ITrack {
+  point: number;
+  alert?: number;
+  place?: IPlace;
+}
+
+interface GroupTracks {
+  id: string;
+  point: number;
+}
+
+export interface AnyObject {
+  [key: string]: any;
+}

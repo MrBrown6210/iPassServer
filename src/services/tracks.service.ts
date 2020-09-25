@@ -1,11 +1,21 @@
 import config from "config";
 import asyncMiddleware from "../middleware/async-middleware";
-import { Track, ITrack } from "../models/track.model";
+import { Track } from "../models/track.model";
 import { Request, Response, NextFunction } from "express";
 
 import createError from "http-errors";
-
-const places = ["test3"];
+import dayjs from "dayjs";
+import {
+  ITrackPoint,
+  RequirePoint,
+  GroupTracks,
+  ITrack,
+  AnyObject,
+  BaseTable,
+  IPlace,
+} from "../types";
+import { groupBy } from "../utils/group";
+import { Place } from "../models/place.model";
 
 export const index = async (
   req: Request,
@@ -25,7 +35,7 @@ export const create = async (
     const track = new Track({
       owner: req.body.owner,
       found: req.body.found,
-      timestamp: req.body.timestamp,
+      leave_at: req.body.leave_at,
       stay: req.body.stay,
     });
     await track.save();
@@ -40,6 +50,7 @@ export const createMultiple = async (
   res: Response,
   next: NextFunction
 ) => {
+  console.log(req.body.items);
   if (!(req.body.items instanceof Array)) {
     return next(createError(400));
   }
@@ -93,232 +104,191 @@ export const explore = async (
 
   const dayInSecond = 60 * 60 * 24;
 
+  const places = await Place.find().select(["uuid", "name"]);
+
   // หาทุก track ที่เกี่ยวข้องกับผู้ติดเชื้อ
   // TODO: ต้อง query 14 วันล่าสุดด้วย ไม่ใช่ข้อมูลทั้งหมด
   const risksTracksFromInfectious = await Track.find({
     owner: diseaseId,
-    timestamp: { $gte: start - day * dayInSecond },
-  });
+    // timestamp: { $gte: start - day * dayInSecond },
+  }).sort("leave_at");
 
-  // ให้คะแนนความเสี่ยงพื้นที่
-  const placeTracks = risksTracksFromInfectious.filter((track) =>
-    places.includes(track.found)
-  );
-  const placePointTracks: ITrackPoint[] = placeTracks.map((track) => {
+  const tracks = risksTracksFromInfectious.map((track) => {
+    const dateTime = new Date(track.leave_at * 1000);
+    const date = dateFormat(dateTime);
+    const place = places.find((p) => p.uuid === track.found);
     return {
-      owner: track.owner,
-      found: track.found,
-      stay: track.stay,
-      timestamp: track.timestamp,
-      point: trackToPoint(track),
+      ...track.toObject(),
+      date,
+      name: place ? place.name : track.found,
     };
   });
 
-  // รวมคะแนนและประเมินความเสี่ยงพื้นที่
-  const groupPlaceTracks = groupTrackById(placePointTracks);
-  const groupPlaceTracksResult = groupPlaceTracks.map((group) => {
-    return {
-      ...group,
-      alert: calculateDangerousFromPoint(group.point),
-    };
-  });
-
-  //////////////////////////////////////////////////////////////////
-
-  // หา id พื้นที่เสี่ยงจากผู้ติดเชื้อ
-  const dangerPlaces = risksTracksFromInfectious
-    .filter((track) => places.includes(track.found))
-    .map((track) => track.found);
-
-  // หาคนในพื้นที่เสี่ยงที่ไม่ใช่คนติดโรคเอง
-  const personalInDangerousZoneTracks = await Track.find({
-    owner: { $ne: diseaseId },
-    found: { $in: dangerPlaces },
-    timestamp: { $gte: start - day * dayInSecond },
-  });
-
-  // ให้คะแนนคนที่อยู่ในพื้นที่เสี่ยง
-  const personalInDangerousZonePointTracks: ITrackPoint[] = personalInDangerousZoneTracks.map(
-    (track) => {
-      let point = 0;
-      if (dangerPlaces.includes(track.found)) {
-        const pointsInMinute: RequirePoint[] = [
-          {
-            require: 2,
-            result: 0.1,
-          },
-          {
-            require: 5,
-            result: 0.2,
-          },
-          {
-            require: 10,
-            result: 0.4,
-          },
-          {
-            require: 60,
-            result: 0.6,
-          },
-        ];
-        point = trackToPoint(track, pointsInMinute);
-      }
-      return {
-        owner: track.owner,
-        found: track.found,
-        stay: track.stay,
-        timestamp: track.timestamp,
-        point,
-      };
-    }
-  );
-
-  const personalInDangerGroup = groupTrackById(
-    personalInDangerousZonePointTracks,
-    "owner"
-  );
-  console.log("xa", personalInDangerGroup);
-
-  //////////////////////////////////////////////////
-
-  const personalTracks = risksTracksFromInfectious.filter(
-    (track) => !places.includes(track.found)
-  );
-
-  const personalPointTracks: ITrackPoint[] = personalTracks.map((track) => {
-    return {
-      owner: track.owner,
-      found: track.found,
-      stay: track.stay,
-      timestamp: track.timestamp,
-      point: trackToPoint(track),
-    };
-  });
-  const groupPersonalTracks = groupTrackById(personalPointTracks);
-
-  const groupPersonalTracksResult = groupPersonalTracks.map((group) => {
-    const _group = personalInDangerGroup.find(
-      (_group) => _group.id === group.id
-    );
-    const point = _group ? _group.point : 0;
-    return {
-      ...group,
-      point: group.point + point,
-      alert: calculateDangerousFromPoint(group.point),
-    };
-  });
-
-  console.log(groupPlaceTracksResult);
-  console.log(groupPersonalTracksResult);
-
-  //   console.log(placePointTracks);
-  //   console.log(personalPointTracks);
-
-  return res.json({
-    places: groupPlaceTracksResult,
-    personals: groupPersonalTracksResult,
-  });
+  res.json(groupBy(tracks, (t) => t.date));
 };
 
-// ใส่ค่าที่ต้องการเพื่อต้องการผลลัพธ์ที่ต้องการนั้นๆ
-interface RequirePoint {
-  result: number;
-  require: number;
-}
+export const exploreDangerPlace = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const diseaseId: string = req.params.diseaseId as string;
+  const places = await Place.find().select(["uuid", "name"]);
+  const tracks = await Track.find({
+    owner: diseaseId,
+    found: { $in: places.map((place) => place.uuid) },
+  });
+  const _tracks: ITrackPoint[] = tracks.map((track) => {
+    const point = riskPlacePointFromDurationInMinutes(track.stay / 1000);
+    return { ...track.toObject(), point };
+  });
 
-interface ITrackPoint extends ITrack {
-  point: number;
-}
+  const results: any[] = [];
 
-interface GroupTracks {
-  id: string;
-  point: number;
-}
+  const group = groupBy(_tracks, (t) => t.found);
+  for (let key in group) {
+    let initValue = 0;
 
-const defaultPointInMinutes: RequirePoint[] = [
+    const place = places.find((p) => p.uuid === key);
+    const point = group[key].reduce(
+      (acc, current) => (acc += current.point),
+      initValue
+    );
+    const alert = dangerousPointFromRiskPoint(point);
+    results.push({
+      id: key,
+      point,
+      alert,
+      place,
+    });
+  }
+  res.json(results);
+};
+
+export const exploreDangerPerson = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const diseaseId: string = req.params.diseaseId as string;
+  const places = await Place.find().select(["uuid", "name"]);
+  const tracks = await Track.find({
+    owner: diseaseId,
+    found: { $nin: places.map((place) => place.uuid) },
+  });
+  const _tracks: ITrackPoint[] = tracks.map((track) => {
+    const point = riskPlacePointFromDurationInMinutes(track.stay / 1000);
+    return { ...track.toObject(), point };
+  });
+
+  const results: any[] = [];
+
+  const group = groupBy(_tracks, (t) => t.found);
+  for (let key in group) {
+    let initValue = 0;
+
+    const point = group[key].reduce(
+      (acc, current) => (acc += current.point),
+      initValue
+    );
+    const alert = dangerousPointFromRiskPoint(point);
+    results.push({
+      id: key,
+      point,
+      alert,
+    });
+  }
+  res.json(results);
+};
+
+const dateFormat = (date: Date) => {
+  return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+};
+
+const riskPlacePointByMinutes: BaseTable[] = [
   {
-    result: 1,
-    require: 2,
+    output: 1,
+    input: 2,
   },
   {
-    result: 1.5,
-    require: 5,
+    output: 1.5,
+    input: 5,
   },
   {
-    result: 2,
-    require: 10,
+    output: 2,
+    input: 10,
   },
   {
-    result: 3,
-    require: 60,
+    output: 3,
+    input: 60,
   },
 ];
 
-const defaultDangerousFromPoint: RequirePoint[] = [
+const riskPersonPointByMinutes = Object.assign(riskPlacePointByMinutes, {});
+
+const riskPersonPointInRiskPlaceByMinutes: BaseTable[] = [
   {
-    result: 1,
-    require: 2,
+    input: 2,
+    output: 0.1,
   },
   {
-    result: 2,
-    require: 5,
+    input: 5,
+    output: 0.2,
   },
   {
-    result: 3,
-    require: 10,
+    input: 10,
+    output: 0.4,
   },
   {
-    result: 4,
-    require: 20,
+    input: 60,
+    output: 0.6,
   },
 ];
 
-const calculateDangerousFromPoint = (
-  point: number,
-  dangerousFromPoint: RequirePoint[] = defaultDangerousFromPoint
-) => {
-  const sortDangerousFromPoint = dangerousFromPoint.sort((lhf, rhf) =>
-    lhf.require < rhf.require ? 1 : -1
-  );
-  // หาช่วงคะแนนจากเวลาที่ต้องการ
-  const dangerRequirePoint = sortDangerousFromPoint.find(
-    (pointInMinute) => point >= pointInMinute.require
-  );
-  const danger = dangerRequirePoint ? dangerRequirePoint.result : 0;
-  return danger;
+const defaultDangerousFromPoint: BaseTable[] = [
+  {
+    output: 1,
+    input: 2,
+  },
+  {
+    output: 2,
+    input: 5,
+  },
+  {
+    output: 3,
+    input: 10,
+  },
+  {
+    output: 4,
+    input: 20,
+  },
+];
+
+const convertValueFromTables = (
+  _tables: BaseTable[],
+  operator: (input: number, value: number) => boolean
+) => (value: number) => {
+  const tables = _tables.sort((lhf, rhf) => (lhf.input < rhf.input ? 1 : -1));
+  const result = tables.find((table) => operator(table.input, value));
+  return result?.output || 0;
 };
 
-const groupTrackById = (tracks: ITrackPoint[], idKey: string = "found") => {
-  const groupsTracks: GroupTracks[] = [];
-  tracks.forEach((track) => {
-    const groupIndex = groupsTracks.findIndex(
-      (group) => group.id == track[idKey]
-    );
-    if (groupIndex >= 0) {
-      groupsTracks[groupIndex].point += track.point;
-    } else {
-      groupsTracks.push({
-        id: track[idKey],
-        point: track.point,
-      });
-    }
-  });
-  return groupsTracks;
-};
+const riskPlacePointFromDurationInMinutes = convertValueFromTables(
+  riskPlacePointByMinutes,
+  (tableInput, value) => tableInput < value
+);
 
-const trackToPoint = (
-  track: ITrack,
-  pointInMinutes: RequirePoint[] = defaultPointInMinutes
-) => {
-  const minuteInMillisecond = 1000 * 60;
-  const stayInMinutes = track.stay / minuteInMillisecond;
-  const sortPointInMinutes = pointInMinutes.sort((lhf, rhf) =>
-    lhf.require < rhf.require ? 1 : -1
-  );
-  // หาช่วงคะแนนจากเวลาที่ต้องการ
-  const pointInMinute = sortPointInMinutes.find(
-    (pointInMinute) => stayInMinutes >= pointInMinute.require
-  );
-  const point = pointInMinute ? pointInMinute.result : 0;
-  console.log(`${stayInMinutes} minutes will give ${point} point`);
-  return point;
-};
+const riskPersonPointFromDurationInMinutes = convertValueFromTables(
+  riskPersonPointByMinutes,
+  (tableInput, value) => tableInput < value
+);
+
+const riskPersonPointInRiskPlaceFromDurationInMinutes = convertValueFromTables(
+  riskPersonPointInRiskPlaceByMinutes,
+  (tableInput, value) => tableInput < value
+);
+
+const dangerousPointFromRiskPoint = convertValueFromTables(
+  defaultDangerousFromPoint,
+  (tableInput, value) => tableInput < value
+);

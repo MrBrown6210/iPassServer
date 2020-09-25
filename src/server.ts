@@ -1,23 +1,13 @@
 import cors from "cors";
-// const cors = require('cors');
 import bodyParser from "body-parser";
-// const bodyParser = require('body-parser');
 import helmet from "helmet";
-// const helmet = require('helmet');
 import morgan from "morgan";
-// const morgan = require('morgan');
 import config from "config";
-// const config = require('config');
 import errorHandler from "api-error-handler";
-// const errorHandler = require('api-error-handler');
 import logger from "./middleware/logger";
-// const logger = require('./middleware/logger');
 import mongoose from "mongoose";
-// const mongoose = require('mongoose');
 import express from "express";
-// const express = require('express');
 import multer from "multer";
-// const multer = require('multer');
 
 import dotenv from "dotenv";
 
@@ -25,6 +15,7 @@ dotenv.config();
 
 import records from "./routes/records.route";
 import tracks from "./routes/tracks.route";
+import places from "./routes/place.route";
 const app = express();
 
 // require('dotenv').config();
@@ -107,36 +98,24 @@ dbConnection.on("error", (error) => {
   }
 });
 
-// const users = require("./routes/users");
-// const auth = require("./routes/auth");
-// const registrations = require("./routes/registrations");
-// const consents = require("./routes/consents");
-// const consentForms = require("./routes/consentForms");
-// const patients = require("./routes/patients");
-// const families = require("./routes/families");
-// const hospitals = require("./routes/hospitals");
-// const projects = require("./routes/projects");
-// const provinces = require("./routes/provinces");
-// const stats = require("./routes/stats");
-// const samples = require("./routes/samples");
-// const home = require("./routes/home");
-
-// app.use("/users", users);
-// app.use("/login", auth);
-// app.use("/registrations", registrations);
-// app.use("/consents", consents);
-// app.use("/consent-forms", consentForms);
-// app.use("/patients", patients);
-// app.use("/families", families);
-// app.use("/hospitals", hospitals);
-// app.use("/projects", projects);
-// app.use("/provinces", provinces);
-// app.use("/stats", stats);
-// app.use("/samples", samples);
-// app.use("/", home);
-
 app.use("/records", records);
 app.use("/tracks", tracks);
+app.use("/places", places);
+
+// handle mongoose-unique-validator
+app.use((err, req, res, next) => {
+  if (err.name === "ValidationError") {
+    return res.status(422).json({
+      errors: Object.keys(err.errors).reduce(function(errors, key) {
+        errors[key] = err.errors[key].message;
+
+        return errors;
+      }, {}),
+    });
+  }
+
+  return next(err);
+});
 
 app.use(express.static("public"));
 app.use(errorHandler());

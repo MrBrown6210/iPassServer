@@ -1,32 +1,36 @@
+import uniqueValidator from "mongoose-unique-validator";
 import mongoose from "mongoose";
+import { ITrack } from "../types";
 const schema = mongoose.Schema;
-
-export interface ITrack {
-  owner: string;
-  found: string;
-  timestamp: number;
-  stay: number;
-}
 
 interface ITrackDocument extends ITrack, mongoose.Document {}
 
-const TrackModel = new schema({
-  owner: {
-    type: String,
-    required: true,
+const TrackModel = new schema(
+  {
+    owner: {
+      type: String,
+      required: true,
+      lowercase: true,
+    },
+    found: {
+      type: String,
+      required: true,
+      lowercase: true,
+    },
+    leave_at: {
+      type: Number,
+      required: true,
+    },
+    stay: {
+      type: Number,
+      required: true,
+    },
   },
-  found: {
-    type: String,
-    required: true,
-  },
-  timestamp: {
-    type: Number,
-    required: true,
-  },
-  stay: {
-    type: Number,
-    required: true,
-  },
-});
+  {
+    timestamps: true,
+  }
+);
+
+TrackModel.plugin(uniqueValidator);
 
 export const Track = mongoose.model<ITrackDocument>("Track", TrackModel);

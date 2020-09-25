@@ -5,6 +5,8 @@ import {
   createMultiple,
   destroy,
   explore,
+  exploreDangerPlace,
+  exploreDangerPerson,
 } from "../services/tracks.service";
 const router = express.Router();
 
@@ -13,5 +15,7 @@ router.post("/", create);
 router.post("/multiple", createMultiple);
 router.delete("/:device", destroy);
 router.get("/explore/:diseaseId", explore);
+router.get("/explore/place/:diseaseId", exploreDangerPlace);
+router.get("/explore/person/:diseaseId", exploreDangerPerson);
 
 export default router;
