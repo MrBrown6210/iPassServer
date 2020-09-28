@@ -16,6 +16,10 @@ import {
 } from "../types";
 import { groupBy } from "../utils/group";
 import { Place } from "../models/place.model";
+import {
+  dangerousPointFromRiskPoint,
+  riskPlacePointFromDurationInMinutes,
+} from "../utils/point";
 
 export const index = async (
   req: Request,
@@ -201,94 +205,24 @@ export const exploreDangerPerson = async (
   res.json(results);
 };
 
+export const e = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const x = await Track.aggregate([
+      {
+        $group: {
+          _id: "$owner",
+          count: { $sum: 1 },
+        },
+      },
+    ]);
+    console.log(x);
+    res.json(x);
+  } catch (e) {
+    console.error(e);
+    next(e);
+  }
+};
+
 const dateFormat = (date: Date) => {
   return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
 };
-
-const riskPlacePointByMinutes: BaseTable[] = [
-  {
-    output: 1,
-    input: 2,
-  },
-  {
-    output: 1.5,
-    input: 5,
-  },
-  {
-    output: 2,
-    input: 10,
-  },
-  {
-    output: 3,
-    input: 60,
-  },
-];
-
-const riskPersonPointByMinutes = Object.assign(riskPlacePointByMinutes, {});
-
-const riskPersonPointInRiskPlaceByMinutes: BaseTable[] = [
-  {
-    input: 2,
-    output: 0.1,
-  },
-  {
-    input: 5,
-    output: 0.2,
-  },
-  {
-    input: 10,
-    output: 0.4,
-  },
-  {
-    input: 60,
-    output: 0.6,
-  },
-];
-
-const defaultDangerousFromPoint: BaseTable[] = [
-  {
-    output: 1,
-    input: 2,
-  },
-  {
-    output: 2,
-    input: 5,
-  },
-  {
-    output: 3,
-    input: 10,
-  },
-  {
-    output: 4,
-    input: 20,
-  },
-];
-
-const convertValueFromTables = (
-  _tables: BaseTable[],
-  operator: (input: number, value: number) => boolean
-) => (value: number) => {
-  const tables = _tables.sort((lhf, rhf) => (lhf.input < rhf.input ? 1 : -1));
-  const result = tables.find((table) => operator(table.input, value));
-  return result?.output || 0;
-};
-
-const riskPlacePointFromDurationInMinutes = convertValueFromTables(
-  riskPlacePointByMinutes,
-  (tableInput, value) => tableInput < value
-);
-
-const riskPersonPointFromDurationInMinutes = convertValueFromTables(
-  riskPersonPointByMinutes,
-  (tableInput, value) => tableInput < value
-);
-
-const riskPersonPointInRiskPlaceFromDurationInMinutes = convertValueFromTables(
-  riskPersonPointInRiskPlaceByMinutes,
-  (tableInput, value) => tableInput < value
-);
-
-const dangerousPointFromRiskPoint = convertValueFromTables(
-  defaultDangerousFromPoint,
-  (tableInput, value) => tableInput < value
-);
