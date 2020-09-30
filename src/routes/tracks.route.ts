@@ -4,10 +4,10 @@ import {
   create,
   createMultiple,
   destroy,
+  exploreOne,
   explore,
-  exploreDangerPlace,
-  exploreDangerPerson,
-  e,
+  explorePerson,
+  explorePlace,
 } from "../services/tracks.service";
 const router = express.Router();
 
@@ -15,9 +15,10 @@ router.get("/", index);
 router.post("/", create);
 router.post("/multiple", createMultiple);
 router.delete("/:device", destroy);
-router.get("/explore/:diseaseId", explore);
-router.get("/explore/place/:diseaseId", exploreDangerPlace);
-router.get("/explore/person/:diseaseId", exploreDangerPerson);
-router.get("/explore/e/:diseaseId", e);
+router.get("/explore", explore);
+router.get("/explore/:diseaseId", exploreOne);
+router.get("/explore/place/:id", explorePlace);
+router.get("/explore/person/:id", explorePerson);
+// router.get("/explorea/:id", explorePerson);
 
 export default router;

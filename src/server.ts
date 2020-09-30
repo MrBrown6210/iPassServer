@@ -16,6 +16,8 @@ dotenv.config();
 import records from "./routes/records.route";
 import tracks from "./routes/tracks.route";
 import places from "./routes/place.route";
+import persons from "./routes/person.route";
+import identities from "./routes/identity.route";
 const app = express();
 
 // require('dotenv').config();
@@ -101,6 +103,8 @@ dbConnection.on("error", (error) => {
 app.use("/records", records);
 app.use("/tracks", tracks);
 app.use("/places", places);
+app.use("/persons", persons);
+app.use("/identities", identities);
 
 // handle mongoose-unique-validator
 app.use((err, req, res, next) => {

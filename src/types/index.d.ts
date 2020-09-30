@@ -5,6 +5,8 @@ export interface ITrack {
   found: string;
   leave_at: number;
   stay: number;
+  point?: number;
+  type?: string;
 }
 
 export interface IPlace {
@@ -12,6 +14,19 @@ export interface IPlace {
   name: string;
   lat: number;
   lng: number;
+}
+
+export interface IPerson {
+  uuid: string;
+  name: string;
+}
+
+export interface IIdentity {
+  uuid: string;
+  name: string;
+  type: string;
+  lat?: number;
+  lng?: number;
 }
 
 export interface BaseTable {

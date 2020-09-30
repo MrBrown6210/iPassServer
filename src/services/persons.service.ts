@@ -1,12 +1,14 @@
+import { json } from "body-parser";
 import { Request, Response, NextFunction } from "express";
-import { Place } from "../models/place.model";
+import { Person } from "../models/person.model";
+
 export const index = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const places = await Place.find(req.query);
-  res.json(places);
+  const persons = await Person.find();
+  res.json(persons);
 };
 
 export const create = async (
@@ -15,17 +17,17 @@ export const create = async (
   next: NextFunction
 ) => {
   try {
-    const place = new Place(req.body);
-    await place.save();
-    res.json(place);
-  } catch (err) {
-    return next(err);
+    const person = new Person(req.body);
+    await person.save();
+    res.json(person);
+  } catch (error) {
+    next(error);
   }
 };
 
 export const show = async (req: Request, res: Response, next: NextFunction) => {
-  const place = await Place.findOne({ _id: req.params.place });
-  res.json(place);
+  const person = await Person.findOne({ _id: req.params.id });
+  res.json(person);
 };
 
 export const destroy = async (
@@ -34,9 +36,9 @@ export const destroy = async (
   next: NextFunction
 ) => {
   try {
-    await Place.findOneAndDelete({ _id: req.params.place });
+    await Person.findOneAndDelete({ _id: req.params.id });
     res.sendStatus(204);
-  } catch (e) {
-    next(e);
+  } catch (error) {
+    next(error);
   }
 };
