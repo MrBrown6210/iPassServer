@@ -506,5 +506,5 @@ export const explorePlace = async (
 };
 
 const dateFormat = (date: Date) => {
-  return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+  return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
 };

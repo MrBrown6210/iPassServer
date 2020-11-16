@@ -24,10 +24,10 @@ const app = express();
 
 // process.env.DATABASE_PASSWORD = ""
 
-if (!config.get("jwtPrivateKey")) {
-  console.error("FATAL ERROR: jwtPrivateKey is missing");
-  process.exit(1);
-}
+// if (!config.get("jwtPrivateKey")) {
+//   console.error("FATAL ERROR: jwtPrivateKey is missing");
+//   process.exit(1);
+// }
 
 process.on("uncaughtException", (ex) => {
   logger.log("error", "uncaughtException ", ex);
