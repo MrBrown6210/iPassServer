@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import { transporter } from "../utils/nodemailer";
 import { Identity } from "../models/identity.model";
 export const index = async (
   req: Request,
@@ -45,6 +46,29 @@ export const destroy = async (
   try {
     await Identity.findOneAndDelete({ _id: req.params.id });
     res.sendStatus(204);
+  } catch (e) {
+    next(e);
+  }
+};
+
+export const notification = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const identity = await Identity.findOne({ uuid: req.params.id });
+    if (!identity) return res.sendStatus(404);
+    if (!identity.email) return res.sendStatus(404);
+    //TODO: send email
+    await transporter.sendMail({
+      from: process.env.EMAIL_USERNAME,
+      to: identity.email,
+      subject: "You are at risk of contracting the disease",
+      html:
+        "<h1>You are at risk of contracting the disease</h1><p>Please go to the hospital for diagnosis</p>",
+    });
+    res.sendStatus(200);
   } catch (e) {
     next(e);
   }

@@ -25,6 +25,9 @@ const Model = new schema({
   lng: {
     type: Number,
   },
+  email: {
+    type: String,
+  },
 });
 
 Model.plugin(uniqueValidator);

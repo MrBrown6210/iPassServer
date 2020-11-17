@@ -396,6 +396,7 @@ export const explorePerson = async (
           point: { $sum: "$point" },
           name: { $first: "$name" },
           type: { $first: "$identity.type" },
+          email: { $first: "$identity.email" },
         },
       },
       {
