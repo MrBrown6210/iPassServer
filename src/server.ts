@@ -54,15 +54,15 @@ const upload = multer({
   dest: `${FILE_PATH}/`,
 });
 
-const DATABASE_USERNAME = process.env.DATABASE_USERNAME || config.db.username;
-const DATABASE_PASSWORD = process.env.DATABASE_PASSWORD || config.db.password;
+const DATABASE_USERNAME = process.env.DATABASE_USERNAME;
+const DATABASE_PASSWORD = process.env.DATABASE_PASSWORD;
 
 const dbOptions: any = {
   useNewUrlParser: true,
   useCreateIndex: true,
   connectTimeoutMS: 100000,
-  // user: DATABASE_USERNAME,
-  // pass: DATABASE_PASSWORD,
+  user: DATABASE_USERNAME,
+  pass: DATABASE_PASSWORD,
   // autoIndex: false,
 };
 
