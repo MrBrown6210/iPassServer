@@ -68,7 +68,7 @@ const dbOptions: any = {
 
 const DATABASE_URL = process.env.DATABASE_URL || config.db.url;
 const DATABASE_PORT = process.env.DATABASE_PORT || config.db.port;
-const dbUri = `mongodb://${DATABASE_URL}:${DATABASE_PORT}/${config.db.name}`;
+const dbUri = `mongodb://${DATABASE_URL}:${DATABASE_PORT}/${config.db.name}?authSource=admin`;
 
 mongoose.connect(dbUri, dbOptions).then(() => {
   console.log("connected");
