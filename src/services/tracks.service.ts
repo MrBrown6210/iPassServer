@@ -236,6 +236,16 @@ const calculateAlertFromTrack = [
     $group: {
       _id: "$owner",
       found_count: { $sum: 1 },
+      found_count_people: {
+        $sum: {
+          $cond: [{ $eq: ["$type", "person"] }, 1, 0],
+        },
+      },
+      found_count_places: {
+        $sum: {
+          $cond: [{ $eq: ["$type", "place"] }, 1, 0],
+        },
+      },
       point: { $sum: "$point" },
       name: { $first: "$name" },
       type: { $first: "$type" },
@@ -244,6 +254,8 @@ const calculateAlertFromTrack = [
   {
     $project: {
       found_count: 1,
+      found_count_people: 1,
+      found_count_places: 1,
       point: 1,
       name: 1,
       type: 1,
