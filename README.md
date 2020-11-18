@@ -25,6 +25,7 @@ $ npm run serve
 $ npm run build
 
 $ npm run start
+(pm2 start npm --name "iPass-Server" -- run start:prod)
 
 ```
 
