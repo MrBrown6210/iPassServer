@@ -212,6 +212,12 @@ const calculateAlertFromTrack = [
     },
   },
   {
+    $unwind: {
+      path: "$found_identity",
+      preserveNullAndEmptyArrays: true,
+    },
+  },
+  {
     $project: {
       point: {
         $switch: {
@@ -230,6 +236,7 @@ const calculateAlertFromTrack = [
         $ifNull: ["$identity.name", "$owner"],
       },
       type: "$identity.type",
+      found_type: "$found_identity.type",
     },
   },
   {
@@ -238,12 +245,12 @@ const calculateAlertFromTrack = [
       found_count: { $sum: 1 },
       found_count_people: {
         $sum: {
-          $cond: [{ $eq: ["$type", "person"] }, 1, 0],
+          $cond: [{ $eq: ["$found_type", "person"] }, 1, 0],
         },
       },
       found_count_places: {
         $sum: {
-          $cond: [{ $eq: ["$type", "place"] }, 1, 0],
+          $cond: [{ $eq: ["$found_type", "place"] }, 1, 0],
         },
       },
       point: { $sum: "$point" },
@@ -287,6 +294,14 @@ export const explore = async (
           localField: "owner",
           foreignField: "uuid",
           as: "identity",
+        },
+      },
+      {
+        $lookup: {
+          from: "identities",
+          localField: "found",
+          foreignField: "uuid",
+          as: "found_identity",
         },
       },
       ...calculateAlertFromTrack,
