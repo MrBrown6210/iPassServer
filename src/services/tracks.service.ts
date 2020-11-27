@@ -98,12 +98,41 @@ export const exploreOne = async (
       },
     },
     {
-      $addFields: {
-        name: "$identity.name",
+      $lookup: {
+        from: "identities",
+        localField: "owner",
+        foreignField: "uuid",
+        as: "owner_identity",
       },
     },
     {
-      $unset: ["identity", "createdAt", "updatedAt", "__v", "owner"],
+      $unwind: {
+        path: "$owner_identity",
+        preserveNullAndEmptyArrays: true,
+      },
+    },
+    {
+      $addFields: {
+        name: "$identity.name",
+        offset: "$owner_identity.offset",
+      },
+    },
+    {
+      $addFields: {
+        offset: {
+          $ifNull: ["$offset", 0],
+        },
+      },
+    },
+    {
+      $unset: [
+        "identity",
+        "owner_identity",
+        "createdAt",
+        "updatedAt",
+        "__v",
+        "owner",
+      ],
     },
     {
       $sort: {
@@ -111,7 +140,7 @@ export const exploreOne = async (
       },
     },
   ]);
-  console.log(risksTracksFromInfectious);
+  // console.log(risksTracksFromInfectious);
   // const risksTracksFromInfectious = await Track.find({
   //   owner: diseaseId,
   //   // timestamp: { $gte: start - day * dayInSecond },
@@ -120,7 +149,9 @@ export const exploreOne = async (
   const tracks = risksTracksFromInfectious.map((track) => {
     const offsetToFirstDecember2020 = 1606780800; // offset to december 2020
     const dateTime = new Date(
-      track.leave_at * 1000 + offsetToFirstDecember2020 * 1000
+      track.leave_at * 1000 +
+        offsetToFirstDecember2020 * 1000 +
+        track.offset * 1000
     );
     const date = dateFormat(dateTime);
     // const place = places.find((p) => p.uuid === track.found);

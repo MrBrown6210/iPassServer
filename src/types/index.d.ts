@@ -28,6 +28,7 @@ export interface IIdentity {
   lat?: number;
   lng?: number;
   email?: string;
+  offset?: number;
 }
 
 export interface BaseTable {

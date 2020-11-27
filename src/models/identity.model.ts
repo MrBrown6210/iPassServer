@@ -28,6 +28,9 @@ const Model = new schema({
   email: {
     type: String,
   },
+  offset: {
+    type: String,
+  },
 });
 
 Model.plugin(uniqueValidator);
