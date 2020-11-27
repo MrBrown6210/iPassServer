@@ -118,7 +118,10 @@ export const exploreOne = async (
   // }).sort("leave_at");
 
   const tracks = risksTracksFromInfectious.map((track) => {
-    const dateTime = new Date(track.leave_at * 1000);
+    const offsetToFirstDecember2020 = 1606780800; // offset to december 2020
+    const dateTime = new Date(
+      track.leave_at * 1000 + offsetToFirstDecember2020 * 1000
+    );
     const date = dateFormat(dateTime);
     // const place = places.find((p) => p.uuid === track.found);
     return {
