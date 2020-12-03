@@ -270,7 +270,7 @@ const calculateAlertFromTrack = [
         $ifNull: ["$identity.name", "$owner"],
       },
       type: "$identity.type",
-      found_type: "$found_identity.type",
+      found_type: "$found_identity.typee",
     },
   },
   {
