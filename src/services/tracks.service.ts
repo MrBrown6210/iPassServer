@@ -7,6 +7,8 @@ import createError from "http-errors";
 import { groupBy } from "../utils/group";
 import { Place } from "../models/place.model";
 
+const filterStarterTime = 5314; // filter เวลาคร่าวๆในการแจกอุปกรณ์ออก
+
 export const index = async (
   req: Request,
   res: Response,
@@ -81,6 +83,8 @@ export const exploreOne = async (
     {
       $match: {
         owner: diseaseId,
+        found: { $ne: "0000" },
+        leave_at: { $gte: filterStarterTime },
       },
     },
     {
@@ -147,10 +151,11 @@ export const exploreOne = async (
   // }).sort("leave_at");
 
   const tracks = risksTracksFromInfectious.map((track) => {
-    const offsetToFirstDecember2020 = 1606780800; // offset to december 2020
+    const offsetToFirstDecember2020 = 1606791600; //1606780800; // offset to december 2020 at 10.00 AM in +7 timezone
+    track.leave_at = track.leave_at + offsetToFirstDecember2020;
     const dateTime = new Date(
       track.leave_at * 1000 +
-        offsetToFirstDecember2020 * 1000 +
+        // offsetToFirstDecember2020 * 1000 +
         track.offset * 1000
     );
     const date = dateFormat(dateTime);
@@ -323,6 +328,11 @@ export const explore = async (
   try {
     const tracks = await Track.aggregate([
       {
+        $match: {
+          leave_at: { $gte: filterStarterTime },
+        },
+      },
+      {
         $lookup: {
           from: "identities",
           localField: "owner",
@@ -416,6 +426,7 @@ export const explorePerson = async (
       {
         $match: {
           owner: req.params.id,
+          leave_at: { $gte: filterStarterTime },
         },
       },
       {
@@ -497,6 +508,7 @@ export const explorePlace = async (
       {
         $match: {
           owner: req.params.id,
+          leave_at: { $gte: filterStarterTime },
         },
       },
       {
