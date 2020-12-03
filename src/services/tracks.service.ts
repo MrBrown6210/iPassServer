@@ -456,7 +456,7 @@ export const explorePerson = async (
           found_count: { $sum: 1 },
           point: { $sum: "$point" },
           name: { $first: "$name" },
-          type: { $first: "$identity.type" },
+          type: { $first: "$identity.typee" },
           email: { $first: "$identity.email" },
         },
       },
@@ -537,7 +537,7 @@ export const explorePlace = async (
           found_count: { $sum: 1 },
           point: { $sum: "$point" },
           name: { $first: "$name" },
-          type: { $first: "$identity.type" },
+          type: { $first: "$identity.typee" },
         },
       },
       {
