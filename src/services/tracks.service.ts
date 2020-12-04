@@ -7,7 +7,7 @@ import createError from "http-errors";
 import { groupBy } from "../utils/group";
 import { Place } from "../models/place.model";
 
-const filterStarterTime = 5314; // filter เวลาคร่าวๆในการแจกอุปกรณ์ออก
+const filterStarterTime = 6314; // filter เวลาคร่าวๆในการแจกอุปกรณ์ออก
 
 export const index = async (
   req: Request,
