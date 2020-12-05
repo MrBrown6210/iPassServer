@@ -64,9 +64,9 @@ export const notification = async (
     await transporter.sendMail({
       from: process.env.EMAIL_USERNAME,
       to: identity.email,
-      subject: "You are at risk of contracting the disease",
+      subject: "คุณอาจมีความเสี่ยงติดเชื้อ COVID-19",
       html:
-        "<h1>You are at risk of contracting the disease</h1><p>Please go to the hospital for diagnosis</p>",
+        "<h1>คุณอาจมีความเสี่ยงติดเชื้อ COVID-19</h1><p>กรุณาตรวจเชื้อเพื่อหยุดยั้งการแพร่ระบาดต่อไป</p>",
     });
     res.sendStatus(200);
   } catch (e) {
