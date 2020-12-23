@@ -16,16 +16,18 @@ dotenv.config();
 import records from "./routes/records.route";
 import tracks from "./routes/tracks.route";
 import places from "./routes/place.route";
+import persons from "./routes/person.route";
+import identities from "./routes/identity.route";
 const app = express();
 
 // require('dotenv').config();
 
 // process.env.DATABASE_PASSWORD = ""
 
-if (!config.get("jwtPrivateKey")) {
-  console.error("FATAL ERROR: jwtPrivateKey is missing");
-  process.exit(1);
-}
+// if (!config.get("jwtPrivateKey")) {
+//   console.error("FATAL ERROR: jwtPrivateKey is missing");
+//   process.exit(1);
+// }
 
 process.on("uncaughtException", (ex) => {
   logger.log("error", "uncaughtException ", ex);
@@ -52,21 +54,21 @@ const upload = multer({
   dest: `${FILE_PATH}/`,
 });
 
-const DATABASE_USERNAME = process.env.DATABASE_USERNAME || config.db.username;
-const DATABASE_PASSWORD = process.env.DATABASE_PASSWORD || config.db.password;
+const DATABASE_USERNAME = process.env.DATABASE_USERNAME;
+const DATABASE_PASSWORD = process.env.DATABASE_PASSWORD;
 
 const dbOptions: any = {
   useNewUrlParser: true,
   useCreateIndex: true,
   connectTimeoutMS: 100000,
-  // user: DATABASE_USERNAME,
-  // pass: DATABASE_PASSWORD,
+  user: DATABASE_USERNAME,
+  pass: DATABASE_PASSWORD,
   // autoIndex: false,
 };
 
 const DATABASE_URL = process.env.DATABASE_URL || config.db.url;
 const DATABASE_PORT = process.env.DATABASE_PORT || config.db.port;
-const dbUri = `mongodb://${DATABASE_URL}:${DATABASE_PORT}/${config.db.name}`;
+const dbUri = `mongodb://${DATABASE_URL}:${DATABASE_PORT}/${config.db.name}?authSource=admin`;
 
 mongoose.connect(dbUri, dbOptions).then(() => {
   console.log("connected");
@@ -101,6 +103,8 @@ dbConnection.on("error", (error) => {
 app.use("/records", records);
 app.use("/tracks", tracks);
 app.use("/places", places);
+app.use("/persons", persons);
+app.use("/identities", identities);
 
 // handle mongoose-unique-validator
 app.use((err, req, res, next) => {

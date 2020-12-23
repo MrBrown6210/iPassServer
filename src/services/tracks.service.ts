@@ -4,26 +4,22 @@ import { Track } from "../models/track.model";
 import { Request, Response, NextFunction } from "express";
 
 import createError from "http-errors";
-import dayjs from "dayjs";
-import {
-  ITrackPoint,
-  RequirePoint,
-  GroupTracks,
-  ITrack,
-  AnyObject,
-  BaseTable,
-  IPlace,
-} from "../types";
 import { groupBy } from "../utils/group";
 import { Place } from "../models/place.model";
+
+const filterStarterTime = 6314; // filter เวลาคร่าวๆในการแจกอุปกรณ์ออก
 
 export const index = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const tracks = await Track.find(req.query);
-  res.json(tracks);
+  try {
+    const tracks = await Track.find(req.query);
+    res.json(tracks);
+  } catch (e) {
+    next(e);
+  }
 };
 
 export const create = async (
@@ -63,27 +59,6 @@ export const createMultiple = async (
   }
 };
 
-// export const show = async (req: Request, res: Response, next: NextFunction) => {
-//   const record = await Record.findOne({ device: req.params.device });
-//   if (!record) {
-//     return res.sendStatus(404);
-//   }
-//   res.json(record);
-// };
-
-// export const update = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   const record = await Record.findOneAndUpdate(
-//     { device: req.body.device },
-//     { $set: req.body },
-//     { new: true }
-//   );
-//   res.json(record);
-// };
-
 export const destroy = async (
   req: Request,
   res: Response,
@@ -93,7 +68,7 @@ export const destroy = async (
   res.sendStatus(200);
 };
 
-export const explore = async (
+export const exploreOne = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -102,193 +77,508 @@ export const explore = async (
   const day = Number(req.query.day) || 14;
   const start = Number(req.query.start) || Date.now() / 1000;
 
-  const dayInSecond = 60 * 60 * 24;
-
-  const places = await Place.find().select(["uuid", "name"]);
-
   // หาทุก track ที่เกี่ยวข้องกับผู้ติดเชื้อ
   // TODO: ต้อง query 14 วันล่าสุดด้วย ไม่ใช่ข้อมูลทั้งหมด
-  const risksTracksFromInfectious = await Track.find({
-    owner: diseaseId,
-    // timestamp: { $gte: start - day * dayInSecond },
-  }).sort("leave_at");
+  const risksTracksFromInfectious = await Track.aggregate([
+    {
+      $match: {
+        owner: diseaseId,
+        found: { $ne: "0000" },
+        leave_at: { $gte: filterStarterTime },
+      },
+    },
+    {
+      $lookup: {
+        from: "identities",
+        localField: "found",
+        foreignField: "uuid",
+        as: "identity",
+      },
+    },
+    {
+      $unwind: {
+        path: "$identity",
+        preserveNullAndEmptyArrays: true,
+      },
+    },
+    {
+      $lookup: {
+        from: "identities",
+        localField: "owner",
+        foreignField: "uuid",
+        as: "owner_identity",
+      },
+    },
+    {
+      $unwind: {
+        path: "$owner_identity",
+        preserveNullAndEmptyArrays: true,
+      },
+    },
+    {
+      $addFields: {
+        name: "$identity.name",
+        offset: "$owner_identity.offset",
+      },
+    },
+    {
+      $addFields: {
+        offset: {
+          $ifNull: ["$offset", 0],
+        },
+      },
+    },
+    {
+      $unset: [
+        "identity",
+        "owner_identity",
+        "createdAt",
+        "updatedAt",
+        "__v",
+        "owner",
+      ],
+    },
+    {
+      $sort: {
+        leave_at: 1,
+      },
+    },
+  ]);
+  // console.log(risksTracksFromInfectious);
+  // const risksTracksFromInfectious = await Track.find({
+  //   owner: diseaseId,
+  //   // timestamp: { $gte: start - day * dayInSecond },
+  // }).sort("leave_at");
 
   const tracks = risksTracksFromInfectious.map((track) => {
-    const dateTime = new Date(track.leave_at * 1000);
+    const offsetToFirstDecember2020 = 1606791600; //1606780800; // offset to december 2020 at 10.00 AM in +7 timezone
+    track.leave_at = track.leave_at + offsetToFirstDecember2020;
+    const dateTime = new Date(
+      track.leave_at * 1000 +
+        // offsetToFirstDecember2020 * 1000 +
+        track.offset * 1000
+    );
     const date = dateFormat(dateTime);
-    const place = places.find((p) => p.uuid === track.found);
+    // const place = places.find((p) => p.uuid === track.found);
     return {
-      ...track.toObject(),
+      ...track,
       date,
-      name: place ? place.name : track.found,
     };
   });
 
   res.json(groupBy(tracks, (t) => t.date));
 };
 
-export const exploreDangerPlace = async (
+// export const exploreDangerPlace = async (
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ) => {
+//   const diseaseId: string = req.params.diseaseId as string;
+//   const places = await Place.find().select(["uuid", "name"]);
+//   const tracks = await Track.find({
+//     owner: diseaseId,
+//     found: { $in: places.map((place) => place.uuid) },
+//   });
+//   const _tracks: ITrackPoint[] = tracks.map((track) => {
+//     const point = riskPlacePointFromDurationInMinutes(track.stay / 1000);
+//     return { ...track.toObject(), point };
+//   });
+
+//   const results: any[] = [];
+
+//   const group = groupBy(_tracks, (t) => t.found);
+//   for (let key in group) {
+//     let initValue = 0;
+
+//     const place = places.find((p) => p.uuid === key);
+//     const point = group[key].reduce(
+//       (acc, current) => (acc += current.point),
+//       initValue
+//     );
+//     const alert = dangerousPointFromRiskPoint(point);
+//     results.push({
+//       id: key,
+//       point,
+//       alert,
+//       place,
+//     });
+//   }
+//   res.json(results);
+// };
+
+// export const exploreDangerPerson = async (
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ) => {
+//   const diseaseId: string = req.params.diseaseId as string;
+//   const places = await Place.find().select(["uuid", "name"]);
+//   const tracks = await Track.find({
+//     owner: diseaseId,
+//     found: { $nin: places.map((place) => place.uuid) },
+//   });
+//   const _tracks: ITrackPoint[] = tracks.map((track) => {
+//     const point = riskPersonPointFromDurationInMinutes(track.stay / 1000);
+//     return { ...track.toObject(), point };
+//   });
+
+//   const results: any[] = [];
+
+//   const group = groupBy(_tracks, (t) => t.found);
+//   for (let key in group) {
+//     let initValue = 0;
+
+//     const point = group[key].reduce(
+//       (acc, current) => (acc += current.point),
+//       initValue
+//     );
+//     const alert = dangerousPointFromRiskPoint(point);
+//     results.push({
+//       id: key,
+//       point,
+//       alert,
+//     });
+//   }
+//   res.json(results);
+// };
+
+const calculateAlertFromTrack = [
+  {
+    $unwind: {
+      path: "$identity",
+      preserveNullAndEmptyArrays: true,
+    },
+  },
+  {
+    $unwind: {
+      path: "$found_identity",
+      preserveNullAndEmptyArrays: true,
+    },
+  },
+  {
+    $project: {
+      point: {
+        $switch: {
+          branches: [
+            { case: { $gte: ["$stay", 60 * 60 * 1000] }, then: 3 },
+            { case: { $gte: ["$stay", 10 * 60 * 1000] }, then: 2 },
+            { case: { $gte: ["$stay", 5 * 60 * 1000] }, then: 1.5 },
+            { case: { $gte: ["$stay", 2 * 60 * 1000] }, then: 1 },
+          ],
+          default: 0,
+        },
+      },
+      count: 1,
+      owner: 1,
+      name: {
+        $ifNull: ["$identity.name", "$owner"],
+      },
+      type: "$identity.type",
+      found_type: "$found_identity.typee",
+    },
+  },
+  {
+    $group: {
+      _id: "$owner",
+      found_count: { $sum: 1 },
+      found_count_people: {
+        $sum: {
+          $cond: [{ $eq: ["$found_type", "person"] }, 1, 0],
+        },
+      },
+      found_count_places: {
+        $sum: {
+          $cond: [{ $eq: ["$found_type", "place"] }, 1, 0],
+        },
+      },
+      point: { $sum: "$point" },
+      name: { $first: "$name" },
+      type: { $first: "$type" },
+    },
+  },
+  {
+    $project: {
+      found_count: 1,
+      found_count_people: 1,
+      found_count_places: 1,
+      point: 1,
+      name: 1,
+      type: 1,
+      alert: {
+        $switch: {
+          branches: [
+            { case: { $gte: ["$point", 20] }, then: 4 },
+            { case: { $gte: ["$point", 10] }, then: 3 },
+            { case: { $gte: ["$point", 5] }, then: 2 },
+            { case: { $gte: ["$point", 2] }, then: 1 },
+          ],
+          default: 0,
+        },
+      },
+    },
+  },
+];
+
+export const explore = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const diseaseId: string = req.params.diseaseId as string;
-  const places = await Place.find().select(["uuid", "name"]);
-  const tracks = await Track.find({
-    owner: diseaseId,
-    found: { $in: places.map((place) => place.uuid) },
-  });
-  const _tracks: ITrackPoint[] = tracks.map((track) => {
-    const point = riskPlacePointFromDurationInMinutes(track.stay / 1000);
-    return { ...track.toObject(), point };
-  });
-
-  const results: any[] = [];
-
-  const group = groupBy(_tracks, (t) => t.found);
-  for (let key in group) {
-    let initValue = 0;
-
-    const place = places.find((p) => p.uuid === key);
-    const point = group[key].reduce(
-      (acc, current) => (acc += current.point),
-      initValue
-    );
-    const alert = dangerousPointFromRiskPoint(point);
-    results.push({
-      id: key,
-      point,
-      alert,
-      place,
-    });
+  try {
+    const tracks = await Track.aggregate([
+      {
+        $match: {
+          leave_at: { $gte: filterStarterTime },
+        },
+      },
+      {
+        $lookup: {
+          from: "identities",
+          localField: "owner",
+          foreignField: "uuid",
+          as: "identity",
+        },
+      },
+      {
+        $lookup: {
+          from: "identities",
+          localField: "found",
+          foreignField: "uuid",
+          as: "found_identity",
+        },
+      },
+      ...calculateAlertFromTrack,
+    ]);
+    console.log(tracks);
+    res.json(tracks);
+  } catch (e) {
+    next(e);
   }
-  res.json(results);
 };
 
-export const exploreDangerPerson = async (
+const alertFromFoundTrack = [
+  {
+    $lookup: {
+      from: "identities",
+      localField: "found",
+      foreignField: "uuid",
+      as: "identity",
+    },
+  },
+  {
+    $unwind: {
+      path: "$identity",
+      preserveNullAndEmptyArrays: true,
+    },
+  },
+  {
+    $addFields: {
+      name: {
+        $ifNull: ["$identity.name", "$found"],
+      },
+      point: {
+        $switch: {
+          branches: [
+            { case: { $gte: ["$stay", 60 * 60 * 1000] }, then: 3 },
+            { case: { $gte: ["$stay", 10 * 60 * 1000] }, then: 2 },
+            { case: { $gte: ["$stay", 5 * 60 * 1000] }, then: 1.5 },
+            { case: { $gte: ["$stay", 2 * 60 * 1000] }, then: 1 },
+          ],
+          default: 0,
+        },
+      },
+    },
+  },
+  {
+    $group: {
+      _id: "$found",
+      found_count: { $sum: 1 },
+      point: { $sum: "$point" },
+      name: { $first: "$name" },
+      type: { $first: "$identity.type" },
+    },
+  },
+  {
+    $addFields: {
+      alert: {
+        $switch: {
+          branches: [
+            { case: { $gte: ["$point", 20] }, then: 4 },
+            { case: { $gte: ["$point", 10] }, then: 3 },
+            { case: { $gte: ["$point", 5] }, then: 2 },
+            { case: { $gte: ["$point", 2] }, then: 1 },
+          ],
+          default: 0,
+        },
+      },
+    },
+  },
+];
+
+export const explorePerson = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const diseaseId: string = req.params.diseaseId as string;
-  const places = await Place.find().select(["uuid", "name"]);
-  const tracks = await Track.find({
-    owner: diseaseId,
-    found: { $nin: places.map((place) => place.uuid) },
-  });
-  const _tracks: ITrackPoint[] = tracks.map((track) => {
-    const point = riskPlacePointFromDurationInMinutes(track.stay / 1000);
-    return { ...track.toObject(), point };
-  });
-
-  const results: any[] = [];
-
-  const group = groupBy(_tracks, (t) => t.found);
-  for (let key in group) {
-    let initValue = 0;
-
-    const point = group[key].reduce(
-      (acc, current) => (acc += current.point),
-      initValue
-    );
-    const alert = dangerousPointFromRiskPoint(point);
-    results.push({
-      id: key,
-      point,
-      alert,
-    });
+  try {
+    const tracks = await Track.aggregate([
+      {
+        $match: {
+          owner: req.params.id,
+          leave_at: { $gte: filterStarterTime },
+        },
+      },
+      {
+        $lookup: {
+          from: "identities",
+          localField: "found",
+          foreignField: "uuid",
+          as: "identity",
+        },
+      },
+      {
+        $unwind: {
+          path: "$identity",
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
+        $addFields: {
+          name: {
+            $ifNull: ["$identity.name", "$found"],
+          },
+          point: {
+            $switch: {
+              branches: [
+                { case: { $gte: ["$stay", 60 * 60 * 1000] }, then: 3 },
+                { case: { $gte: ["$stay", 10 * 60 * 1000] }, then: 2 },
+                { case: { $gte: ["$stay", 5 * 60 * 1000] }, then: 1.5 },
+                { case: { $gte: ["$stay", 2 * 60 * 1000] }, then: 1 },
+              ],
+              default: 0,
+            },
+          },
+        },
+      },
+      {
+        $group: {
+          _id: "$found",
+          found_count: { $sum: 1 },
+          point: { $sum: "$point" },
+          name: { $first: "$name" },
+          type: { $first: "$identity.typee" },
+          email: { $first: "$identity.email" },
+        },
+      },
+      {
+        $match: {
+          type: "person",
+        },
+      },
+      {
+        $addFields: {
+          alert: {
+            $switch: {
+              branches: [
+                { case: { $gte: ["$point", 20] }, then: 4 },
+                { case: { $gte: ["$point", 10] }, then: 3 },
+                { case: { $gte: ["$point", 5] }, then: 2 },
+                { case: { $gte: ["$point", 2] }, then: 1 },
+              ],
+              default: 0,
+            },
+          },
+        },
+      },
+    ]);
+    res.json(tracks);
+  } catch (e) {
+    next(e);
   }
-  res.json(results);
+};
+
+export const explorePlace = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const tracks = await Track.aggregate([
+      {
+        $match: {
+          owner: req.params.id,
+          leave_at: { $gte: filterStarterTime },
+        },
+      },
+      {
+        $lookup: {
+          from: "identities",
+          localField: "found",
+          foreignField: "uuid",
+          as: "identity",
+        },
+      },
+      {
+        $unwind: {
+          path: "$identity",
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
+        $addFields: {
+          name: {
+            $ifNull: ["$identity.name", "$found"],
+          },
+          point: {
+            $switch: {
+              branches: [
+                { case: { $gte: ["$stay", 60 * 60 * 1000] }, then: 3 },
+                { case: { $gte: ["$stay", 10 * 60 * 1000] }, then: 2 },
+                { case: { $gte: ["$stay", 5 * 60 * 1000] }, then: 1.5 },
+                { case: { $gte: ["$stay", 2 * 60 * 1000] }, then: 1 },
+              ],
+              default: 0,
+            },
+          },
+        },
+      },
+      {
+        $group: {
+          _id: "$found",
+          found_count: { $sum: 1 },
+          point: { $sum: "$point" },
+          name: { $first: "$name" },
+          type: { $first: "$identity.typee" },
+        },
+      },
+      {
+        $match: {
+          type: "place",
+        },
+      },
+      {
+        $addFields: {
+          alert: {
+            $switch: {
+              branches: [
+                { case: { $gte: ["$point", 20] }, then: 4 },
+                { case: { $gte: ["$point", 10] }, then: 3 },
+                { case: { $gte: ["$point", 5] }, then: 2 },
+                { case: { $gte: ["$point", 2] }, then: 1 },
+              ],
+              default: 0,
+            },
+          },
+        },
+      },
+    ]);
+    res.json(tracks);
+  } catch (e) {
+    next(e);
+  }
 };
 
 const dateFormat = (date: Date) => {
-  return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+  return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
 };
-
-const riskPlacePointByMinutes: BaseTable[] = [
-  {
-    output: 1,
-    input: 2,
-  },
-  {
-    output: 1.5,
-    input: 5,
-  },
-  {
-    output: 2,
-    input: 10,
-  },
-  {
-    output: 3,
-    input: 60,
-  },
-];
-
-const riskPersonPointByMinutes = Object.assign(riskPlacePointByMinutes, {});
-
-const riskPersonPointInRiskPlaceByMinutes: BaseTable[] = [
-  {
-    input: 2,
-    output: 0.1,
-  },
-  {
-    input: 5,
-    output: 0.2,
-  },
-  {
-    input: 10,
-    output: 0.4,
-  },
-  {
-    input: 60,
-    output: 0.6,
-  },
-];
-
-const defaultDangerousFromPoint: BaseTable[] = [
-  {
-    output: 1,
-    input: 2,
-  },
-  {
-    output: 2,
-    input: 5,
-  },
-  {
-    output: 3,
-    input: 10,
-  },
-  {
-    output: 4,
-    input: 20,
-  },
-];
-
-const convertValueFromTables = (
-  _tables: BaseTable[],
-  operator: (input: number, value: number) => boolean
-) => (value: number) => {
-  const tables = _tables.sort((lhf, rhf) => (lhf.input < rhf.input ? 1 : -1));
-  const result = tables.find((table) => operator(table.input, value));
-  return result?.output || 0;
-};
-
-const riskPlacePointFromDurationInMinutes = convertValueFromTables(
-  riskPlacePointByMinutes,
-  (tableInput, value) => tableInput < value
-);
-
-const riskPersonPointFromDurationInMinutes = convertValueFromTables(
-  riskPersonPointByMinutes,
-  (tableInput, value) => tableInput < value
-);
-
-const riskPersonPointInRiskPlaceFromDurationInMinutes = convertValueFromTables(
-  riskPersonPointInRiskPlaceByMinutes,
-  (tableInput, value) => tableInput < value
-);
-
-const dangerousPointFromRiskPoint = convertValueFromTables(
-  defaultDangerousFromPoint,
-  (tableInput, value) => tableInput < value
-);

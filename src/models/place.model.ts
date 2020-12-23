@@ -9,6 +9,7 @@ const PlaceModel = new schema({
   uuid: {
     type: String,
     required: true,
+    unique: true,
   },
   name: {
     type: String,
